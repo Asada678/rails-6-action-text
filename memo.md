@@ -69,6 +69,8 @@ post.title.chop!
 
 
 reload!
-
-
 ```
+
+# 国際化
+https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module
+
