@@ -74,3 +74,8 @@ reload!
 # 国際化
 https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module
 
+# バリデーション 投稿の長さ
+```
+post = Post.find(4)
+
+```
