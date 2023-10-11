@@ -50,4 +50,6 @@ show-source ActiveStorage::Attachment # 多対多の関係を確認
   belongs_to :record, polymorphic: true, touch: true
   belongs_to :blob, class_name: "ActiveStorage::Blob"
 
+blob = content.embeds_blobs.first
+open storage/gs/tu/gstuw6kr899e67mnl1zq4oag6zrs -a preview # 画像ファイルを確認 
 ```
