@@ -53,3 +53,22 @@ show-source ActiveStorage::Attachment # 多対多の関係を確認
 blob = content.embeds_blobs.first
 open storage/gs/tu/gstuw6kr899e67mnl1zq4oag6zrs -a preview # 画像ファイルを確認 
 ```
+
+# Validation
+```
+validates :title, length: { maximun: 32 }
+
+docker-compose exec web ./bin/rails console -s
+
+post = Post.new
+post.title = "aaaaaaaaaassssssssssddddddddddffffffffffffffffffffffffff"
+post.valid?
+post.errors
+post.title.chop
+post.title.chop!
+
+
+reload!
+
+
+```
