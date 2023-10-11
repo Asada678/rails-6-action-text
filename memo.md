@@ -12,4 +12,25 @@ show-source Rails
 ls bin/docker-compose-attach
 
 docker-compose exec web ./bin/rails console # Rails consoleでpryを利用可能になる
+docker-compose exec web ./bin/rails console -s # サンドボックスモード
+[1] pry(main)> show-source Post.has_rich_text
+
+```
+
+# モデルの相関についての確認（action_text_rich_textsテーブル）
+```
+post = Post.find(3)
+content = post.content
+
+# articleモデルを作成（複数のモデルにhas_rich_textが利用されているケースを確認するため）
+docker-compose exec web ./bin/rails generate model article
+docker-compose exec web ./bin/rails db:migrate
+
+article = Article.create
+statement = article.statement
+statement.save!
+
+# ポリモーフィックアソシエーション
+show-source ActionText::RichText
+# belongs_to :record, polymorphic: true, touch: true
 ```
