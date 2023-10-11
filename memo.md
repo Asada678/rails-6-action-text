@@ -34,3 +34,20 @@ statement.save!
 show-source ActionText::RichText
 # belongs_to :record, polymorphic: true, touch: true
 ```
+
+# モデルの相関について（active_storage_attachments）
+```
+show-source ActionText::RichText
+# has_many_attached :embeds
+
+post = Post.find(3)
+content = post.content
+content.embeds_attachments # rich_textが保持する画像データ
+attachments = content.embeds_attachments
+attachment = attachments.first
+
+show-source ActiveStorage::Attachment # 多対多の関係を確認
+  belongs_to :record, polymorphic: true, touch: true
+  belongs_to :blob, class_name: "ActiveStorage::Blob"
+
+```
