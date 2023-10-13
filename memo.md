@@ -79,3 +79,15 @@ https://guides.rubyonrails.org/i18n.html#configure-the-i18n-module
 post = Post.find(4)
 
 ```
+
+# 添付ファイルのサイズ　　バリデーション
+```
+docker-compose exec web ./bin/rails console -s
+show-source ActionText::RichText
+content = post.content
+content.body.attachables
+attachable = content.body.attachables.grep(ActiveStorage::Blob).first
+attachable.byte_size
+attachable.byte_size / (1024 * 1_000)
+attachable.byte_size / (1024 * 1_000.0)
+```
