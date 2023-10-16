@@ -91,3 +91,16 @@ attachable.byte_size
 attachable.byte_size / (1024 * 1_000)
 attachable.byte_size / (1024 * 1_000.0)
 ```
+
+
+# 添付ファイル数のバリデーション
+```
+docker-compose exec web ./bin/rails console -s
+post = Post.find(3) 
+show-source ActionText::RichText
+post.content.body .attachables
+post.content.body .attachables.grep(ActiveStorage::Blob)
+post.content.body .attachables.grep(ActiveStorage::Blob).count
+
+
+```
