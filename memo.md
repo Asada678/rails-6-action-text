@@ -101,6 +101,16 @@ show-source ActionText::RichText
 post.content.body .attachables
 post.content.body .attachables.grep(ActiveStorage::Blob)
 post.content.body .attachables.grep(ActiveStorage::Blob).count
+```
 
-
+# ゴミデータをぶっ壊す！
+```
+ActiveStorage::Blob.count
+blob_ids = ActiveStorage::Blob.pluck(:id)
+ActiveStorage::Attachment
+ActiveStorage::Attachment.pluck(:blob_id)
+_blob_ids = ActiveStorage::Attachment.pluck(:blob_id)
+unreferenced_blob_ids = blob_ids - _blob_ids
+ActiveStorage::Blob.where(id: unreferenced_blob_ids)
+ActiveStorage::Blob.where(id: unreferenced_blob_ids).delete_all
 ```
